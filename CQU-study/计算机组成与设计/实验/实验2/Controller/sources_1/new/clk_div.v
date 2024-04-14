@@ -9,8 +9,14 @@ module clk_div(
     output clk_division
 );
     reg[27:0] cnt=0;
-    assign clk_division=cnt[26];   //26th从0~1~0才是2^26
+    reg division=0;
+    assign clk_division=division;   //26th从0~1~0才是2^26
     always@(posedge clk)begin
+        if(cnt==50000000-1)begin
+        division<=~division;
+        cnt<=0;
+        end
+        else
         cnt=cnt+1;
     end
     

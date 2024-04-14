@@ -16,7 +16,8 @@ module top(
     pc gate2(clk_division,rst,addr,ena);
     
     wire[31:0] IR;                      //32bits指令
-    DisM gate3(addr>>2,clk_division,ena,rst,IR);  //传入ROM的是字节地址，因此要右移2位
+    IR_ROM gate3(clk_division,rst,ena,addr,IR);
+//    DisM gate3(addr>>2,clk_division,ena,rst,IR);  //传入ROM的是字节地址，因此要右移2位
     
     controller gate4(IR[31:26],IR[5:0],aluctrl,memtoreg,memwrite,alusrc,regdst,regwrite,branch,jump);
     
