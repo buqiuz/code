@@ -29,7 +29,7 @@ module aludec(
                     6'b101010:aluctrl=111;  //slt
                 endcase
             end
-            default:aluctrl='b0;            //写成z不好上板子
+            default:aluctrl='b0;            
         endcase
     end
 endmodule

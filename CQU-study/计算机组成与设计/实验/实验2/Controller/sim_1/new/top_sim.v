@@ -11,7 +11,7 @@ module top_sim();
     wire ena;
     wire[31:0] addr;
     pc gate2(clk,rst,addr,ena);
-    DisM gate3(addr>>2,clk,ena,rst,IR);
+    IR_ROM gate3(.clka(clk),.rsta(rst),.ena(ena),.addra(addr),.douta(IR));
     controller gate4(IR[31:26],IR[5:0],aluctrl,memtoreg,memwrite,alusrc,regdst,regwrite,branch,jump);
     
     always #50 begin

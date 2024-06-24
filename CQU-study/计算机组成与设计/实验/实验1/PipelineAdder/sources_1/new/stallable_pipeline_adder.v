@@ -57,7 +57,7 @@ module stallable_pipeline_adder(
             tmpb1<=24'b0;
         end
         else begin                      //pipeline 1不用考虑被前一级暂停
-            {c_out_12,sum1}<=cin_a[7:0]+cin_b[7:0];
+            {c_out_12,sum1}<=cin_a[7:0]+cin_b[7:0]+c_in;
             tmpa1<=cin_a[31:8];
             tmpb1<=cin_b[31:8];
 //            go1<=1;

@@ -10,7 +10,7 @@ module clk_div(
 );
     reg[27:0] cnt=0;
     reg division=0;
-    assign clk_division=division;   //26th¥”0~1~0≤≈ «2^26
+    assign clk_division=division;  
     always@(posedge clk)begin
         if(cnt==50000000-1)begin
         division<=~division;

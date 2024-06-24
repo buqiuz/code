@@ -13,20 +13,20 @@ module top_sim2();
     
 //    always #20 begin
 //        clk<=~clk;
-//        addr<=addr+1;
+//        addr<=addr+0.5;
 //    end
     initial begin
-        #300 clk=1;addr=6;
-        #30 clk=0;
-        #30 clk=1;addr=7;
+        #30 clk=1;addr=4;
         #30 clk=0;
         #30 clk=1;addr=8;
         #30 clk=0;
-        #30 clk=1;addr=9;
+        #30 clk=1;addr=12;
         #30 clk=0;
-        #30 clk=1;addr=10;
+        #30 clk=1;addr=16;
         #30 clk=0;
-//        #30 clk=1;addr=11;
+        #30 clk=1;addr=20;
+        #30 clk=0;
+        #30 clk=1;addr=24;
 //        #30 clk=0;
 //        #30 clk=1;addr=12;
 //        #30 clk=0;

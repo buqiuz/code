@@ -12,14 +12,14 @@
 */
 
 module maindec(
-    input [5:0] op,              //输入opcode
-    output reg[1:0] aluop,      //输出alu控制信号
+    input [5:0] op,             
+    output reg[1:0] aluop,     
     output reg memtoreg,memwrite,alusrc,regdst,regwrite,branch,jump
 );
     always@(*)begin
         case(op)
             6'b000000:begin     //R型
-                {regwrite,regdst,alusrc,branch,memwrite,memtoreg,jump}=7'b1100000;  //顺序按指导书表5
+                {regwrite,regdst,alusrc,branch,memwrite,memtoreg,jump}=7'b1100000;  
                 aluop=2'b10;
             end
             6'b100011:begin     //lw
@@ -27,7 +27,6 @@ module maindec(
                 aluop=2'b00;
             end
             6'b101011:begin     //sw
-//                {regwrite,regdst,alusrc,branch,memwrite,memtoreg,jump}=7'b0z101z0;
                 {regwrite,regdst,alusrc,branch,memwrite,memtoreg,jump}=7'b0010100;
                 aluop=2'b00;
             end
