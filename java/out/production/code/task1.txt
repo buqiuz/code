@@ -1,0 +1,20 @@
+public class task1{
+	public static void main(String[] args){
+		System.out.println("我的名字叫陈涛，今年20岁，专业是计算机科学与技术，2年后毕业，我希望的年薪是1000000万.");
+		System.out.println();
+		System.out.println("id      姓名      年龄      专业      成绩");
+		System.out.println("101     陈天文    20        计算机    70");
+		System.out.println("102     刘昭然    25        大数据    90");
+		System.out.println("103     梁峻豪    30        物联网    60");
+		System.out.println();
+		System.out.println("===================");
+		System.out.println("======个人简历=====");
+		System.out.println("===================");
+		System.out.println("姓名：郭君昊");
+		System.out.println("年龄：28");
+		System.out.println("专业：物联网");
+		System.out.println("籍贯：重庆");
+		System.out.println("电话：13398786789");
+		System.out.println("地址：重庆互联网学院");
+	}
+}
