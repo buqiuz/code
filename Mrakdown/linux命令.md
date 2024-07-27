@@ -233,7 +233,7 @@ grep [-n] "string" file
 - 将前一个命令的输出作为后一个命令的输入。
 - `ls -l | grep "string"`：在 `ls -l` 的输出中查找包含指定字符串的行。
 
-## su 
+## su
 
 >switch user
 
