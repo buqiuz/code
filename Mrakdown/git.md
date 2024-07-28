@@ -79,6 +79,7 @@ git commit -m " " -a
 
 - `git switch <branch>`:切换分支
 - `git switch -c <branch>`:创建并切换分支
-- `git switch -c <branch> origin/<branch>`:创建并切换分支,同时与远程分支建立跟踪关系
+<!-- - `git switch -c <branch> origin/<branch>`:创建并切换分支,同时与远程分支建立跟踪关系 -->
+- `git switch -c <branch> <commit>`:以一个提交commit来创建一个分支
 
 >也可以在推送时使用`--set-upstream`的简写`-u`来建立跟踪关系
