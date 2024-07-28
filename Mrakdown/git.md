@@ -59,9 +59,9 @@ git commit -m " " -a
 >查看远程库信息
 
 - `git remote -v`:verbose 显示所有远程仓库的详细信息
-- `git remote add origin <url>`:添加远程库,其中origin是远程库的名字（默认是origin），<url>是远程库的地址
+- `git remote add origin <url>`:添加远程库,其中origin是远程库的名字（默认是origin），`<url>`是远程库的地址
 - `git push -u origin main`:设置跟踪关系,`--set-upstream`的简写,将远程仓库的main分支与本地仓库的main分支建立跟踪关系,之后就可以使用`git push`和`git pull`命令来推送和拉取本地仓库和远程仓库之间的代码了
-- `git remote set-url origin` <url>:修改远程仓库的地址
+- `git remote set-url origin <url>`:修改远程仓库的地址
 
 ## git branch
 
