@@ -1,1 +1,0 @@
-import{n as s,q as e}from"./index-207c8571.js";import{m as a}from"./antd-62e1c33f.js";async function c(){return s("/websiteInfo").catch(t=>a.warn(t))}async function f(t){return e("websiteInfo/stationmaster",t).catch(n=>a.warn(n))}async function i(t){return e("websiteInfo/webInfo",t).catch(n=>a.warn(n))}export{i as a,f as u,c as w};
