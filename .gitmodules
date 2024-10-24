@@ -1,0 +1,3 @@
+[submodule "CQU_Computer_Network"]
+	path = CQU_Computer_Network
+	url = git@github.com:starry521/CQU_Computer_Network.git
