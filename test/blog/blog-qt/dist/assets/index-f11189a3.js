@@ -1,0 +1,1 @@
+import{d as n,o as _,a as o,e,t as s,a1 as a}from"./index-35141ee5.js";const i={class:"header"},c={class:"title"},l={class:"subtitle"},d=n({__name:"index",props:{title:String,subtitle:String},setup(t){return(r,p)=>(_(),o("div",null,[e("div",i,[e("h2",c,s(t.title),1),e("h3",l,[e("span",null,s(t.subtitle),1)])])]))}});const h=a(d,[["__scopeId","data-v-54e1de00"]]);export{h as _};

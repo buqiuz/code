@@ -1,3 +1,10 @@
+---
+title: "Habits"
+author: John Doe
+date: March 22, 2024
+output: word_document
+---
+
 ## SSH
 ssh  user@ip/域名
 

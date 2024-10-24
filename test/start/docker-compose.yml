@@ -1,0 +1,98 @@
+version: '3'
+services:
+  blog-backend:
+    image: blog-backend
+    container_name: blog-backend
+    ports:
+      - "8088:8088"
+    restart: always
+
+  # music:
+  #   image: music
+  #   container_name: music
+  #   ports:
+  #     - "3344:3344"
+  #   restart: always
+
+  blog-qt:
+    image: blog-qt
+    container_name: blog-qt
+    ports:
+      - "80:80"
+    restart: always
+
+  blog-ht:
+    image: blog-ht
+    container_name: blog-ht
+    ports:
+      - "81:81"
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbit
+    hostname: my-rabbit
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: always
+    command: /bin/sh -c "rabbitmq-plugins enable rabbitmq_management && echo management_agent.disable_metrics_collector = false > /etc/rabbitmq/conf.d/management_agent.disable_metrics_collector.conf && rabbitmq-server"
+    
+  redis:
+    image: redis:7.2.3
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - /data/redis/redis.conf:/etc/redis/redis.conf
+      - /data/redis/data:/data
+      - /data/redis/logs:/logs
+    command: ["redis-server", "/etc/redis/redis.conf"]
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    volumes:
+      - /data/mysql/data:/var/lib/mysql
+      - /data/mysql/conf/my.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: CS2313684085cs #root用户密码
+      TZ: Asia/Shanghai
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  netease_cloud_music_api:
+    image: binaryify/netease_cloud_music_api:v4.10.0
+    container_name: netease_cloud_music_api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - http_proxy=
+      - https_proxy=
+      - no_proxy=
+      - HTTP_PROXY=
+      - HTTPS_PROXY=
+      - NO_PROXY=
+
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000" # API 端口
+      - "9001:9001" # 控制台端口
+    environment:
+      MINIO_ROOT_USER: admin # 管理后台用户名
+      MINIO_ROOT_PASSWORD: 12345678 # 管理后台密码，最小8个字符
+      MINIO_COMPRESS: "off" # 开启压缩 on 开启 off 关闭
+      MINIO_COMPRESS_EXTENSIONS: "" # 扩展名 .pdf,.doc 为空 所有类型均压缩
+      MINIO_COMPRESS_MIME_TYPES: "" # mime 类型 application/pdf 为空 所有类型均压缩
+    volumes:
+      - /data/minio/data:/data/ # 映射当前目录下的data目录至容器内/data目录      
+      - /data/minio/config:/root/.minio/ # 映射配置目录
+    command: server --address ':9000' --console-address ':9001' /data # 指定容器中的目录 /data
+    privileged: true
+    restart: always

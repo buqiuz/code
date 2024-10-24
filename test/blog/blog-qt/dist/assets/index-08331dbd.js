@@ -1,0 +1,1 @@
+import{aj as r}from"./index-35141ee5.js";function a(e){return r({url:"/leaveWord/list",method:"get",params:{id:e}})}function o(e){return r.post("/leaveWord/auth/userLeaveWord",JSON.stringify(e))}export{a as g,o as u};

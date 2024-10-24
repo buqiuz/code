@@ -1,0 +1,1 @@
+import{_ as e}from"./index-207c8571.js";import{a1 as o,a5 as t,a8 as c}from"./vue-54d91d02.js";import"./antd-62e1c33f.js";const n={},r=c("h2",null,"数据大屏",-1),s=[r];function a(_,i){return o(),t("div",null,s)}const m=e(n,[["render",a]]);export{m as default};
