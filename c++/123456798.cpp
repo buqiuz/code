@@ -1,85 +1,62 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void show(string str){
-    cout << "NO" << endl;
+class Person
+{
+public:
+    int a,b;
+    string name;
+    char c;
+public:
+    virtual void show (){
+        cout<<a<<" "<<b<<" "<<name<<" "<<c<<endl;
+    };
+    Person(int a,int b,string name,char c):a(a),b(b),name(name),c(c){}
+};
 
-    if (str == "/*"||str == "("||str == "["||str == "{")
-    {
-        cout<<str<<"-?"<<endl;
+class Student:public Person
+{
+public:
+    int score;
+public:
+    void show() override {
+        cout<<a<<" "<<b<<" "<<name<<" "<<c<<" "<<score<<endl;
     }
-    if (str == "*/"||str == ")"||str == "]"||str == "}")
-    {
-        cout<<"?-"<<str<<endl;
-    }
-}
-int main() {
-    stack<string> s;
-    char ch1, ch2;
-    // 使用 cin.get() 来读取字符，包括回车符
-    cin.get(ch1);
-    cin.get(ch2);
-    // 只读入直到检测到输入的某一行仅为".\n"
-    while (!(ch1 == '.' && ch2 == '\n')) {
-        // 处理入栈
-        if (ch1 == '(' || ch1 == '[' || ch1 == '{') {
-            s.push(string(1, ch1));
-            ch1 = ch2;
-            cin.get(ch2);  // 继续读取下一个字符
-            continue;
-        }
+    Student(int a,int b,string name,char c,int score):Person(a,b,name,c),score(score){}
+};
 
-        if (ch1 == '/' && ch2 == '*') {
-            s.push("/*");
+int main (){
 
-            cin.get(ch1);
-            cin.get(ch2);
-            continue;
-        }
-        // 处理出栈
-        if (ch1 == ')' || ch1 == ']' || ch1 == '}') {
-            if (s.empty()) {
-                show(string(1,ch1));
-                return 0;  // 立即终止程序
-            }
-            if ((ch1 == ')' && s.top() == "(") ||
-                (ch1 == ']' && s.top() == "[") ||
-                (ch1 == '}' && s.top() == "{")) {
-                s.pop();
-  
-                ch1 = ch2;
-                cin.get(ch2);  // 继续读取下一个字符
-                continue;
-            }
-            if (!s.empty())
-                show(s.top());
-            return 0;  // 立即终止程序
-        }
-        if (ch1 == '*' && ch2 == '/') {
-            if (s.empty())
-            {
-                show("*/");
-                return 0;
-            }
-            if (s.top() == "/*") {
-                s.pop();
-                cin.get(ch1);
-                cin.get(ch2);
-                continue;
-            }
+    // auto createVector = [](int n)->vector<int>{
+    //     vector<int> v(n);
+    //     for(int i=0;i<n;i++){
+    //         cin>>v[i];
+    //     }
+    //     return v;
+    // };
 
-            show(s.top());
-            return 0; 
-        }
-        // 继续读取下一个字符
-        ch1 = ch2;
-        cin.get(ch2);
-    }
-    // 最后检查栈是否为空
-    if (s.empty()) {
-        cout << "YES" << endl;
-    } else {
-        show(s.top());
-    }
-    return 0;
+    // vector<int> v =createVector(5);
+    // for_each(v.begin(),v.end(),[](auto x){cout<<x<<" ";});
+
+    // Student s(1,2,"abc",'d',100);
+    // Person& p =s;
+    // p.show();
+    // // cout<<p.a<<" "<<p.b<<" "<<p.name<<" "<<p.c<<endl;
+
+    // regex r(R"(1000|\d{0,3})");
+    // string s;
+    // cin>>s;
+    // if(regex_match(s,r)){
+    //     cout<<"Matched"<<endl;
+    // }
+    // else{
+    //     cout<<"Not Matched"<<endl;
+    // }
+
+    int s=10;
+    while(s) 
+        s++;
+
+    cout<<" sfdfds";
+    return 0; 
 }
