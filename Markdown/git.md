@@ -83,3 +83,14 @@ git commit -m " " -a
 - `git switch -c <branch> <commit>`:以一个提交commit来创建一个分支
 
 >也可以在推送时使用`--set-upstream`的简写`-u`来建立跟踪关系
+
+## 启用openclash后无法连接
+
+要在 SSH 配置文件中设置此行为，请在 ~/.ssh/config 编辑该文件，并添加以下部分：
+
+```config
+Host github.com
+    Hostname ssh.github.com
+    Port 443
+    User git
+```
