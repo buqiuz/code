@@ -94,3 +94,35 @@ Host github.com
     Port 443
     User git
 ```
+
+## git 修改提交信息
+
+开启交互式 rebase（假设要修改最近 4 次提交）
+
+- `git rebase -i HEAD~4`
+
+将某条提交的 `pick` 改成 `reword`，就会让你修改该提交的信息
+
+```git
+pick b088bc9 删除 gitmodule
+reword f307cce 刷题
+pick 5543ced day 2
+pick 08e7e01 数组
+```
+
+重新排序提交
+
+```git
+pick f307cce 刷题
+pick b088bc9 删除 gitmodule
+pick 5543ced day 2
+pick 08e7e01 数组
+```
+
+删除提交
+
+```git
+pick b088bc9 删除 gitmodule
+pick 5543ced day 2
+pick 08e7e01 数组
+```
