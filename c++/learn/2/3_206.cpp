@@ -1,10 +1,4 @@
-struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode* next) : val(x), next(next) {}
-};
+#include "ListNode.h"
 
 /*
 * 之所以不能用一个指针来完成，是因为我们需要保存cur的下一个节点，以便我们可以将cur的next指向pre，然后更新pre和cur指针。
@@ -29,7 +23,22 @@ public:
     }
 };
 
-// 版本一
+//版本一
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(!head||!head->next) return head;
+
+        ListNode* newHead =reverseList(head->next);
+
+        head->next->next=head;
+        head->next=nullptr;
+        
+        return newHead;
+    }
+};
+
+// 版本二
 class Solution {
 public:
     ListNode* reverse(ListNode* pre,ListNode* cur){

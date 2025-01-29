@@ -6,11 +6,7 @@
 
 
 //初版
-struct LinkedNode{
-    int val;
-    LinkedNode* next;
-    LinkedNode(int val):val(val),next(nullptr){}
-};
+#include "ListNode.h"
 
 class MyLinkedList {
 public:
