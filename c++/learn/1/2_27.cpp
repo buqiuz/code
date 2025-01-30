@@ -64,6 +64,22 @@ class Solution {
     }
 };
 
+class Solution {
+public:
+int removeElement(vector<int>& nums, int val) {
+    int left=0;
+    int right=nums.size()-1;
+    while(left<=right){
+        if(nums[left]==val){
+            swap(nums[left],nums[right--]);
+        }else{
+            left++;
+        }
+    }
+    return left;
+}
+};
+
 // 版本二  快慢指针，保留数组相对顺序，有较多无效的写操作
 class Solution {
 public:

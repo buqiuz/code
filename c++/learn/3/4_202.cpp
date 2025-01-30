@@ -15,7 +15,6 @@ public:
             }
             if(!is_appear.insert(total).second) return false;
         }
-
         return true;
     }
 };
