@@ -25,7 +25,6 @@ int main(){
     cin>>k;
     string s;
     cin>>s;
-    
     reverse(s.begin(),s.end());
     reverse(s.begin(),s.begin()+k);
     reverse(s.begin()+k,s.end());
