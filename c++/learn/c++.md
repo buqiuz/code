@@ -15,3 +15,7 @@ auto cmp = [](const pair<int,int>& a,const pair<int,int>& b){
 
 priority_queue<pair<int,int>,vector<pair<int,int>>,decltype(cmp)> pq(v.begin(),v.end(),cmp);
 ```
+
+## tree
+
+> 后续遍历的返回值自带回溯,也就是可以从一棵树自底向上进行操作
