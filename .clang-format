@@ -2,3 +2,7 @@ BasedOnStyle: LLVM
 BreakBeforeBraces: Attach
 IndentWidth: 4
 ColumnLimit: 120
+
+# 访问修饰符 (public/private/protected) 与 class 左对齐
+AccessModifierOffset: -4
+
