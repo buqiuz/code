@@ -7,6 +7,12 @@
 - C_Cpp: Clang_format_style ：file
 - 在项目根目录下添加.clang-format文件，然后自定义配置
 
+## 代码片段
+
+- `Ctrl+Shift+P` 
+- `Preferences: Configure User Snippets`
+- 新建代码片段文件
+
 ## c++11(智能指针)  :待学习
 
 ## c++20(ranges::view)  :待学习
