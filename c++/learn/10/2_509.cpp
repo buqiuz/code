@@ -2,7 +2,7 @@
 using namespace std;
 
 class Solution {
-  public:
+public:
     int fib(int n) {
         if (n < 2)
             return n;
@@ -15,6 +15,7 @@ class Solution {
         return dp[n];
     }
 };
+
 
         if (n < 2)
             return n;
