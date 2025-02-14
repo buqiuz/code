@@ -9,7 +9,7 @@
 
 ## 代码片段
 
-- `Ctrl+Shift+P` 
+- `Ctrl+Shift+P`
 - `Preferences: Configure User Snippets`
 - 新建代码片段文件
 
