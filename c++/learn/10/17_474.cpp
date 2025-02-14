@@ -1,6 +1,7 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
+// 回溯，会超时，并且可以用vector代替unordered_map
 class Solution {
 private:
     int ret = 0;
@@ -41,9 +42,22 @@ public:
     }
 };
 
-int main(){
-    Solution s;
-    vector<string> strs={"10", "0001", "111001", "1", "0"};
-    cout<<s.findMaxForm(strs,5,3)<<endl;
-    return 0;
-}
+// 动态规划 dp[i][j]表示有i个0和j个1时能组成的最多字符串的个数
+class Solution {
+public:
+    int findMaxForm(vector<string> &strs, int m, int n) {
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+        for (auto &x : strs) {
+            int count_0 = count(x.begin(), x.end(), '0');
+            int count_1 = x.size() - count_0;
+            for (int i = m; i >= count_0; i--) {
+                for (int j = n; j >= count_1; j--) {
+                    dp[i][j] = max(dp[i][j], dp[i - count_0][j - count_1] + 1);
+                }
+            }
+        }
+
+        return dp[m][n];
+    }
+};
