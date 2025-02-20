@@ -5,7 +5,7 @@ class UnionFind {
     vector<int> fa;
 
 public:
-    int find(int u) { return fa[u] = u ? u : (fa[u] = find(fa[u])); }
+    int find(int u) { return fa[u] == u ? u : (fa[u] = find(fa[u])); }
     void join(int u, int v) {
         u = find(u);
         v = find(v);

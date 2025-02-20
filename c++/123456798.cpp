@@ -1,50 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    int v, e;
-    cin >> v >> e;
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>> &prerequisites) {
+        // 记录节点入度
+        vector<int> inDegree(numCourses, 0);
 
-    int x, y, val;
-    vector<vector<int>> grid(v + 1, vector<int>(v + 1, INT32_MAX));
+        for (auto x : prerequisites) {
+            inDegree[x[1]]++;
+        }
 
-    for (int i = 0; i < e; i++) {
-        cin >> x >> y >> val;
-        grid[x][y] = val;
-        grid[y][x] = val;
-    }
-    // 距离当前节点的距离向量
-    vector<int> dist(v + 1, INT32_MAX - 1);
-
-    // 节点
-    vector<bool> inTree(v + 1, false);
-    // 循环v-1次，才可以将所有节点纳入生成树
-    for (int i = 0; i < v - 1; i++) {
-        // 找到最距离生成树最近的节点
-        int cur = -1;
-        int minDist = INT32_MAX;
-        for (int j = 1; j <= v; j++) {
-            if (!inTree[j] && dist[j] < minDist) {
-                cur = j;
-                minDist = dist[j];
+        queue<int> q;
+        // 找出入度为零的节点加入queue
+        for (int i = 0; i < numCourses; i++) {
+            if (inDegree[i] == 0)
+                q.push(i);
+        }
+        vector<int> ret;
+        while (!q.empty()) {
+            int cur = q.front();
+            q.pop();
+            ret.push_back(cur);
+            // 删除当前节点的边,即更新入度,然后同时更新q
+            for (auto &edge : prerequisites) {
+                if (edge[0] == cur)
+                    inDegree[edge[1]]--;
+                if (inDegree[edge[1]] == 0)
+                    q.push(edge[1]);
             }
         }
+        return ret.size() == numCourses ? true : false;
+    }
+};
 
-        // 加入节点
-        inTree[cur] = true;
-        // 更新距离向量
-        for (int j = 1; j <= v; j++) {
-            if (!inTree[j] && grid[cur][j] < dist[j])
-                dist[j] = grid[cur][j];
-        }
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> prerequisites(m, vector<int>(2));
+    for (int i = 0; i < m; i++) {
+        cin >> prerequisites[i][0] >> prerequisites[i][1];
     }
 
-    int ret = 0;
-    for (int i = 2; i <= v; i++) {
-        ret += dist[i];
-    }
-
-    cout << ret << endl;
-
+    Solution solution;
+    cout << solution.canFinish(n, prerequisites) << endl;
     return 0;
 }

@@ -95,3 +95,4 @@ priority_queue<pair<int,int>,vector<pair<int,int>>,decltype(cmp)> pq(v.begin(),v
 - 广搜：找最短路径适合，只找一条就行
 - 深搜：所有可能
 
+>如果是稠密图，也就是节点从0-n，则可以用`vector<vector<int>>` 来构建,如果是稀疏图,也就是节点零散,则用`unordered_map<int,vector<int>>` 来构建
