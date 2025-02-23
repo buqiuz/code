@@ -1,19 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct edge {
-    int l, r, val;
-};
-
 int main() {
     int n, m;
     cin >> n >> m;
-
-    // vector<edge> edges(m);
     vector<vector<int>> grid(n + 1, vector<int>(n + 1, INT32_MAX));
     for (int i = 0; i < m; i++) {
-        // cin>>edges[i].l>>edges[i].r>>edges[i].val;
-        // adj[edges[i].l].push_back(edges[i].r);
         int l, r, val;
         cin >> l >> r >> val;
         grid[l][r] = val;
@@ -37,7 +29,7 @@ int main() {
         // 加入节点
         visited[cur] = true;
 
-        // 跟新距离
+        // 更新距离
         for (int j = 1; j <= n; j++) {
             if (!visited[j] && grid[cur][j] != INT32_MAX && grid[cur][j] + minDist[cur] < minDist[j])
                 minDist[j] = grid[cur][j] + minDist[cur];
