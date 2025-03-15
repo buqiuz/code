@@ -135,3 +135,58 @@ int main() {
         }
     }
 }
+
+// 第二次写
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<pair<int, int>> dir{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+void dfs(vector<vector<int>> &adj, vector<vector<bool>> &visited, int x, int y) {
+    for (auto [dx, dy] : dir) {
+        int xx = x + dx;
+        int yy = y + dy;
+        if (xx < 0 || yy < 0 || xx >= adj.size() || yy >= adj[0].size() || adj[x][y] > adj[xx][yy] ||
+            visited[xx][yy]) // 避免重复访问
+            continue;        // 不用写提前返回，在这里判断不满足条件就不会继续递归
+
+        visited[xx][yy] = true; // 每次递归前标记
+        dfs(adj, visited, xx, yy);
+    }
+}
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> adj(n, vector<int>(m));
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> adj[i][j];
+        }
+    }
+
+    vector<vector<bool>> first(n, vector<bool>(m, false));
+    vector<vector<bool>> second(n, vector<bool>(m, false));
+    for (int i = 0; i < n; i++) {
+        first[i][0] = true;
+        dfs(adj, first, i, 0);
+        second[i][m - 1] = true;
+        dfs(adj, second, i, m - 1);
+    }
+
+    for (int i = 0; i < m; i++) {
+        first[0][i] = true;
+        dfs(adj, first, 0, i);
+        second[n - 1][i] = true;
+        dfs(adj, second, n - 1, i);
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (first[i][j] && second[i][j]) {
+                cout << i << " " << j << endl;
+            }
+        }
+    }
+    return 0;
+}

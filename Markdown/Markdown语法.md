@@ -115,7 +115,7 @@ console.log('hello world')
 
 ## 6. 图片
 
-![图片](http://8.137.91.234:9000/blog/background/%E5%8E%8B%E7%BC%A9%E6%B0%B4%E7%8B%97.png)
+![图片](https://raw.githubusercontent.com/buqiuz/Images/main/%25E5%258E%258B%25E7%25BC%25A9%25E6%25B0%25B4%25E7%258B%2597.png)
 
 ## 7. 表格
 

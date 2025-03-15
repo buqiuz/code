@@ -15,8 +15,8 @@ Refference:
 
 ## B树
 
-![alt text](images/mysql/image.png)
-  
+![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image.png)
+
 - 自平衡多路搜索树
 - 因为一个节点可以放多个键，所以不需要频繁的平衡
 - 2d+1阶B树，则一个节点最少d个键，最多2d个键，分支比键多一个，当键为2d+1后，拆分为两个d的子节点，中间那个键上升为父节点，然后两个子节点放在父节点两边，如果父节点也超过2d+1，则递归。
@@ -31,7 +31,7 @@ Refference:
 > 非聚簇索引:索引和数据是分开的。以主键或非空不重复键建立索引，然后叶子节点(存储地址)指向某一条具体的记录  主索引叶子节点存储某一条记录的地址，辅助索引也是如此。
 > innoDB就是聚簇索引，MyISAM就是非聚簇索引，InnoDB是默认推荐引擎，因其事务支持和崩溃恢复能力，而MyISAM逐渐被替代
 
-![alt text](images/mysql/image-1.png)
+![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image-1.png)
 
 - 如果一个m阶的B+树，则除了根节点，所有节点最少m/2个键，最多m-1个键，对于任意节点最多m个子节点，子节点总是比键多一个
 - 所有元素都在叶子节点，如果顺序查询则不需要中序遍历（多次io），直接找到需要顺序查询的第一个元素，然后顺序遍历就行，中间节点不存储元素，只存储键。
@@ -42,7 +42,7 @@ Refference:
 
 **叶子节点放地址**
 找到地址后回表
-![alt text](images/mysql/image-2.png)
+![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image-2.png)
 
 - frm:即帧，存储表结构
 - MYD：data，即存储数据
@@ -53,7 +53,7 @@ Refference:
 ## innoDB
 
 **叶子节点放具体数据**
-![alt text](images/mysql/image-3.png)
+![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image-3.png)
 
 - frm：即帧，存储表结构
 - ibd：放索引加叶子放数据

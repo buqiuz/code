@@ -8,7 +8,7 @@
 
 查看mysql数据库，发现被删库了并且留下了勒索信息
 
-![alt text](images/记录mysql被勒索/78ddcbc8bf49051e3c3df775c89fd8dc.png)
+![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/78ddcbc8bf49051e3c3df775c89fd8dc.png)
 
 居然要支付0.018比特币，太离谱。直接开始恢复数据过程。
 
@@ -23,7 +23,7 @@
 ## 4.后续
 
 1. 再次执行`mysqlbinlog --start-datetime='2024-07-30 15:00:00' --stop-datetime='2024-07-30 23:30:00' /var/lib/mysql/binlog.000001 >/var/lib/mysql/before_delete.sql`:从三点开始恢复,到23点结束,检查`before_delete.sql`文件,发现在240730 19:49:35 被删库
-![alt text](images/记录mysql被勒索/image.png)
+![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image.png)
 
 ## 5.总结
 

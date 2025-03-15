@@ -2,7 +2,7 @@
 
 ## 1.简介
 
-![alt text](images/java反射/image.png)
+![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image.png)
 
 ## 2.获取class
 
@@ -23,7 +23,7 @@
 
 - `构造方法.getModifiers()`:获取修饰符
 
-![alt text](images/java反射/image-1.png)
+![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image-1.png)
 
 ### 3.2.获取参数
 

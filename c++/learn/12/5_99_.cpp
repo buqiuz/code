@@ -43,3 +43,51 @@ int main() {
     cout << ret << endl;
     return 0;
 }
+
+// 第二次写
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<pair<int, int>> dir{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+void bfs(vector<vector<int>> &grid, int x, int y) {
+    queue<pair<int, int>> que;
+    grid[x][y] = 0;
+    que.push({x, y});
+    while (!que.empty()) {
+        auto [cur_x, cur_y] = que.front();
+        que.pop();
+        for (auto [dx, dy] : dir) {
+            int xx = cur_x + dx;
+            int yy = cur_y + dy;
+            if (xx < 0 || yy < 0 || xx >= grid.size() || yy >= grid[0].size() || grid[xx][yy] == 0)
+                continue;
+            grid[xx][yy] = 0;
+            que.push({xx, yy});
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> grid(n, vector<int>(m));
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> grid[i][j];
+        }
+    }
+
+    int ret = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (grid[i][j] == 1) {
+                ret++;
+                bfs(grid, i, j);
+            }
+        }
+    }
+    cout << ret;
+
+    return 0;
+}

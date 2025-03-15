@@ -1,33 +1,33 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-//初版模拟，3  2  2  1  1这样填充
+// 初版模拟，3  2  2  1  1这样填充
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        vector<vector<int>> v(n,vector<int>(n,0));
+        vector<vector<int>> v(n, vector<int>(n, 0));
 
-        int num=1;
-        int x=0;
-        for(int i=n;i>0;){
-            //右
-            for(int j=0;j<i;j++){
-                v[x][j+x]=num++;
+        int num = 1;
+        int x = 0;
+        for (int i = n; i > 0;) {
+            // 右
+            for (int j = 0; j < i; j++) {
+                v[x][j + x] = num++;
             }
-            //下
+            // 下
             i--;
-            for(int j=0;j<i;j++){
-                v[j+x+1][n-1-x]=num++;
+            for (int j = 0; j < i; j++) {
+                v[j + x + 1][n - 1 - x] = num++;
             }
-            //左
-            for(int j=i;j>0;j--){
-                v[n-1-x][x+j-1]=num++;
+            // 左
+            for (int j = i; j > 0; j--) {
+                v[n - 1 - x][x + j - 1] = num++;
             }
-            //上
+            // 上
             i--;
-            for(int j=i;j>0;j--){
-                v[x+j][x]=num++;
+            for (int j = i; j > 0; j--) {
+                v[x + j][x] = num++;
             }
             x++;
         }
@@ -35,39 +35,38 @@ public:
     }
 };
 
-
 // 版本一
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        vector<vector<int>> v(n,vector<int>(n,0));
+        vector<vector<int>> v(n, vector<int>(n, 0));
 
-        int num=1;
-        int x=0;
-        for(int i=n-1;i>0;i-=2){
-            //右
-            for(int j=0;j<i;j++){
-                v[x][j+x]=num++;
+        int num = 1;
+        int x = 0;
+        for (int i = n - 1; i > 0; i -= 2) {
+            // 右
+            for (int j = 0; j < i; j++) {
+                v[x][j + x] = num++;
             }
-            //下
-            // i--;
-            for(int j=0;j<i;j++){
-                v[j+x][n-1-x]=num++;
+            // 下
+            //  i--;
+            for (int j = 0; j < i; j++) {
+                v[j + x][n - 1 - x] = num++;
             }
-            //左
-            for(int j=0;j<i;j++){
-                v[n-1-x][n-1-j-x]=num++;
+            // 左
+            for (int j = 0; j < i; j++) {
+                v[n - 1 - x][n - 1 - j - x] = num++;
             }
-            //上
-            // i--;
-            for(int j=0;j<i;j++){
-                v[n-1-j-x][x]=num++;
+            // 上
+            //  i--;
+            for (int j = 0; j < i; j++) {
+                v[n - 1 - j - x][x] = num++;
             }
             x++;
         }
 
-        if(n%2==1){
-            v[n/2][n/2]=num++;
+        if (n % 2 == 1) {
+            v[n / 2][n / 2] = num++;
         }
         return v;
     }
@@ -77,34 +76,34 @@ public:
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        vector<vector<int>> v(n,vector<int>(n,0));
+        vector<vector<int>> v(n, vector<int>(n, 0));
 
-        int num=1;
-        int x=0;
-        for(int k=n-1;k>0;k-=2){
-            int i=x,j=x;    
-            //右
-            for(;j<n-1-x;j++){
-                v[i][j]=num++;
+        int num = 1;
+        int x = 0;
+        for (int k = n - 1; k > 0; k -= 2) {
+            int i = x, j = x;
+            // 右
+            for (; j < n - 1 - x; j++) {
+                v[i][j] = num++;
             }
-            //下
-            for(;i<n-1-x;i++){
-                v[i][j]=num++;
+            // 下
+            for (; i < n - 1 - x; i++) {
+                v[i][j] = num++;
             }
 
-            //左
-            for(;j>x;j--){
-                v[i][j]=num++;
+            // 左
+            for (; j > x; j--) {
+                v[i][j] = num++;
             }
-            //上
-            for(;i>x;i--){
-                v[i][j]=num++;
+            // 上
+            for (; i > x; i--) {
+                v[i][j] = num++;
             }
             x++;
         }
 
-        if(n%2==1){
-            v[n/2][n/2]=num++;
+        if (n % 2 == 1) {
+            v[n / 2][n / 2] = num++;
         }
         return v;
     }
@@ -115,13 +114,13 @@ class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
         vector<vector<int>> res(n, vector<int>(n, 0)); // 使用vector定义一个二维数组
-        int startx = 0, starty = 0; // 定义每循环一个圈的起始位置
+        int startx = 0, starty = 0;                    // 定义每循环一个圈的起始位置
         int loop = n / 2; // 每个圈循环几次，例如n为奇数3，那么loop = 1 只是循环一圈，矩阵中间的值需要单独处理
-        int mid = n / 2; // 矩阵中间的位置，例如：n为3， 中间的位置就是(1，1)，n为5，中间位置为(2, 2)
-        int count = 1; // 用来给矩阵中每一个空格赋值
-        int offset = 1; // 需要控制每一条边遍历的长度，每次循环右边界收缩一位
-        int i,j;
-        while (loop --) {
+        int mid = n / 2;  // 矩阵中间的位置，例如：n为3， 中间的位置就是(1，1)，n为5，中间位置为(2, 2)
+        int count = 1;    // 用来给矩阵中每一个空格赋值
+        int offset = 1;   // 需要控制每一条边遍历的长度，每次循环右边界收缩一位
+        int i, j;
+        while (loop--) {
             i = startx;
             j = starty;
 
@@ -156,5 +155,81 @@ public:
             res[mid][mid] = count;
         }
         return res;
+    }
+};
+
+// 第二次写
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> vec(n, vector<int>(n));
+
+        int k = n / 2;
+        int cnt = 1;
+        int i = 0, j = 0;
+        int num = 1;
+        while (cnt <= k) {
+            // 右
+            for (; j < n - cnt; j++) {
+                vec[i][j] = num++;
+            }
+
+            // 下
+            for (; i < n - cnt; i++) {
+                vec[i][j] = num++;
+            }
+            // 左
+            for (; j >= cnt; j--) {
+                vec[i][j] = num++;
+            }
+            // 上
+
+            for (; i >= cnt; i--) {
+                vec[i][j] = num++;
+            }
+            i++;
+            j++;
+            cnt++;
+        }
+        if (n % 2 == 1)
+            vec[k][k] = n * n;
+        return vec;
+    }
+};
+
+// 第二次写优化
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> vec(n, vector<int>(n));
+
+        int cnt = n / 2;  //总共循环次数
+        int k = 0;        //当前循环次数
+        int num = 1;
+        while (k < cnt) {
+            int i = k, j = k;  //起始位置
+            // 右
+            for (; j < n - k - 1; j++) {
+                vec[i][j] = num++;
+            }
+
+            // 下
+            for (; i < n - k - 1; i++) {
+                vec[i][j] = num++;
+            }
+            // 左
+            for (; j > k; j--) {
+                vec[i][j] = num++;
+            }
+            // 上
+
+            for (; i > k; i--) {
+                vec[i][j] = num++;
+            }
+            k++;
+        }
+        if (n % 2 == 1)
+            vec[cnt][cnt] = n * n;
+        return vec;
     }
 };

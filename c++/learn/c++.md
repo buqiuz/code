@@ -100,6 +100,147 @@ priority_queue<pair<int,int>,vector<pair<int,int>>,decltype(cmp)> pq(v.begin(),v
 
 - 详细查看11——29_127__.cpp,了解内存分配
 
+| 适用场景           | DFS | BFS           |
+| ------------------ | --- | ------------- |
+| 需要遍历所有可能解 | ✅   | ❌             |
+| 需要找到最优解     | ❌   | ✅（最短路径） |
+| 适合递归实现       | ✅   | ❌             |
+| 适合队列结构       | ❌   | ✅             |
+| 适合剪枝优化       | ✅   | ❌             |
+| 适用于层次遍历     | ❌   | ✅             |
+
+> dfs的两种写法
+> 建议用第二种,因为bfs跟第二种相似,都是先标记再push
+
+```c++
+// 写法一：dfs 处理当前访问的节点
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std;
+
+void dfs(const vector<list<int>>& graph, int key, vector<bool>& visited) {
+    if (visited[key]) {
+        return;
+    }
+    visited[key] = true;
+    list<int> keys = graph[key];
+    for (int key : keys) {
+        // 深度优先搜索遍历
+        dfs(graph, key, visited);
+    }
+}
+
+int main() {
+    int n, m, s, t;
+    cin >> n >> m;
+
+    // 节点编号从1到n，所以申请 n+1 这么大的数组
+    vector<list<int>> graph(n + 1); // 邻接表
+    while (m--) {
+        cin >> s >> t;
+        // 使用邻接表 ，表示 s -> t 是相连的
+        graph[s].push_back(t);
+    }
+    vector<bool> visited(n + 1, false);
+    dfs(graph, 1, visited);
+    //检查是否都访问到了
+    for (int i = 1; i <= n; i++) {
+        if (visited[i] == false) {
+            cout << -1 << endl;
+            return 0;
+        }
+    }
+    cout << 1 << endl;
+}
+```
+
+```c++
+写法二：dfs处理下一个要访问的节点
+#include <iostream>
+#include <vector>
+#include <list>
+using namespace std;
+
+void dfs(const vector<list<int>>& graph, int key, vector<bool>& visited) {
+    list<int> keys = graph[key];
+    for (int key : keys) {
+        if (visited[key] == false) { // 确认下一个是没访问过的节点
+            visited[key] = true;
+            dfs(graph, key, visited);
+        }
+    }
+}
+
+int main() {
+    int n, m, s, t;
+    cin >> n >> m;
+
+    vector<list<int>> graph(n + 1);
+    while (m--) {
+        cin >> s >> t;
+        graph[s].push_back(t);
+
+    }
+    vector<bool> visited(n + 1, false);
+
+    visited[1] = true; // 节点1 预先处理
+    dfs(graph, 1, visited);
+
+    for (int i = 1; i <= n; i++) {
+        if (visited[i] == false) {
+            cout << -1 << endl;
+            return 0;
+        }
+    }
+    cout << 1 << endl;
+}
+```
+
+```c++
+#include <iostream>
+#include <vector>
+#include <list>
+#include <queue>
+using namespace std;
+
+int main() {
+    int n, m, s, t;
+    cin >> n >> m;
+
+    vector<list<int>> graph(n + 1);
+    while (m--) {
+        cin >> s >> t;
+        graph[s].push_back(t);
+
+    }
+    vector<bool> visited(n + 1, false);
+    visited[1] = true; //  1 号房间开始
+    queue<int> que;
+    que.push(1); //  1 号房间开始
+
+    // 广度优先搜索的过程
+    while (!que.empty()) {
+        int key = que.front(); que.pop();
+         list<int> keys = graph[key];
+         for (int key : keys) {
+             if (!visited[key]) {
+                visited[key] = true;
+                que.push(key);
+             }
+         }
+    }
+
+    for (int i = 1; i <= n; i++) {
+        if (visited[i] == false) {
+            cout << -1 << endl;
+            return 0;
+        }
+    }
+    cout << 1 << endl;
+}
+```
+
 ### 最短路径
 
 - `dijkstra`: 基于贪心，当访问了一个节点后，就确定该节点为最短路径，不再更新，所以要用`visited`数组，时间复杂度低   优先级队列来支持贪心，若不用visited，则退化为`SPFA`
@@ -108,3 +249,188 @@ priority_queue<pair<int,int>,vector<pair<int,int>>,decltype(cmp)> pq(v.begin(),v
   - `11_24_94_.cpp`:非`SPFA`，但提前退出,然后可以判断负环路，且可以可用作单源有限最短路径的求解
   - `11_25_94_.cpp`:`SPAF`+判断负环+提前退出
 - `astar`:f=g+h
+
+## roadmap
+
+### Data Types
+
+**c++是static type的语言，类型在编译时就确定,类型错误会导致编译失败**。
+
+但他也支持一定的动态类型能力
+
+- RTTI(运行时类型识别):允许在 运行时 获取对象的真实类型，用于多态对象的类型检查和转换。
+  - RTTI 依赖虚表（vtable）:所以需要虚函数
+- dynamic_cast 进行向下转换:即将基类指针或引用转换为派生类指针或引用。
+  - 需要使用RTTI，以确保向下转换是安全的
+- typeid 识别对象类型:允许在运行时获取对象的类型信息
+- std::any:（C++17）支持存储任意类型:提供了一种类型安全的方式存储任意类型的值，类似于 Python 或 JavaScript 的动态变量。
+- std::variant（C++17）支持类型安全的变体:是一种类型安全的联合体，可存储 多个类型中的一种，比 std::any 更高效。
+
+### Scope
+
+- `Global scope`:全局变量
+- `Local scope`:函数内变量
+- `Namespace scope`：用`::`
+- `Class scope`:for static,using `::`,for non-static,using `->`
+
+### Forward Declaration
+
+>拥有分离的declaration和definition，所以可以先声明，后定义
+
+- `Class Forward Declaration`
+- `Function Forward Declaration`
+
+### using
+
+在c++中，用using代替typedef.
+
+- `using namespace`: `using namespace std;`
+- `using std::endl;`
+- `using Int = int;`
+
+### extern
+
+>extern 关键字用于声明一个全局变量或对象，但不在当前文件分配存储空间。
+
+- 在多个文件中共享变量或对象（避免重复定义）。
+- 告诉编译器变量的定义在别的地方（通常是某个库或另一个源文件）。
+
+比如在`iostream`中,就定义了
+
+```c++
+  extern istream cin;/// Linked to standard input
+  extern ostream cout;/// Linked to standard output
+  extern ostream cerr;/// Linked to standard error (unbuffered)
+  extern ostream clog;/// Linked to standard error (buffered)
+```
+
+避免多个cpp文件引用iostream时出现cin,cout的重复定义,真正的定义在其标准库实现中
+
+```c++
+// ✅ 头文件 iostream
+namespace std {
+    extern ostream cout;  // 这里只是声明
+}
+
+// ✅ 标准库的实现文件
+namespace std {
+    ostream cout;  // 这里只定义一次
+}
+```
+
+**所以extern实现了跨文件共享同一个全局变量**。
+
+### Include Guard
+
+- #ifndef / #define / #endif:防止头文件被多次包含，避免重复定义错误。
+- #ifdef / #ifndef:判断一个宏是否被定义，然后决定是否编译
+
+```c++
+// File: myheader.h
+#ifndef MYHEADER_H  // 如果 MYHEADER_H 没有定义
+#define MYHEADER_H  // 定义 MYHEADER_H，防止重复包含
+
+int globalVar = 10;
+
+#endif  // 结束 ifndef
+
+//File: main.cpp
+#include "myheader.h"
+#include "myheader.h"  // ✅ 这次不会重复包含
+
+int main() {
+    return globalVar;
+}
+```
+
+因为 MYHEADER_H 在第一次包含时已经定义，第二次 #include 时 #ifndef 失败，头文件不会重复解析。避免了`globalVar`的重复定义
+
+```c++
+#ifdef _GLIBCXX_USE_WCHAR_T
+  extern wistream wcin;    /// 宽字符标准输入
+  extern wostream wcout;   /// 宽字符标准输出
+  extern wostream wcerr;   /// 宽字符标准错误（非缓冲）
+  extern wostream wclog;   /// 宽字符标准错误（缓冲）
+#endif
+```
+
+_GLIBCXX_USE_WCHAR_T 是一个 宏，用于判断是否支持 wchar_t（宽字符类型）。
+
+### Rule of Zero, Five, Three
+
+>管理object resources
+
+- Rule of Zero:假如一个类没有管理资源，那么就不必实现
+
+  ```c++
+  struct MyResource {
+      std::string name;
+      int value;
+  };
+  ```
+
+- Rule of Three:假如一个类管理了资源，那么就必须要实现构造函数，拷贝构造函数，=运算符
+
+  ```c++
+  class MyResource {
+  public:
+      // Constructor and destructor
+      MyResource() : data(new int[100]) {} 
+      ~MyResource() { delete[] data; } 
+
+      // Copy constructor
+      MyResource(const MyResource& other) : data(new int[100]) {
+          std::copy(other.data, other.data + 100, data);
+      }
+
+      // Copy assignment operator
+      MyResource& operator=(const MyResource& other) {
+          if (&other == this) { return *this; }
+          std::copy(other.data, other.data + 100, data);
+          return *this;
+      }
+
+  private:
+      int* data;
+  };
+  ```
+
+- Rule of Five:现代c++推荐要实现move构造函数和move =运算符
+
+  ```c++
+  class MyResource {
+  public:
+      // Constructors and destructor
+      MyResource() : data(new int[100]) {}
+      ~MyResource() { delete[] data; }
+
+      // Copy constructor
+      MyResource(const MyResource& other) : data(new int[100]) {
+          std::copy(other.data, other.data + 100, data);
+      }
+
+      // Copy assignment operator
+      MyResource& operator=(const MyResource& other) {
+          if (&other == this) { return *this; }
+          std::copy(other.data, other.data + 100, data);
+          return *this;
+      }
+
+      // Move constructor
+      MyResource(MyResource&& other) noexcept : data(other.data) {
+          other.data = nullptr;
+      }
+
+      // Move assignment operator
+      MyResource& operator=(MyResource&& other) noexcept {
+          if (&other == this) { return *this; }
+          delete[] data;
+          data = other.data;
+          other.data = nullptr;
+          return *this;
+      }
+
+  private:
+      int* data;
+  };
+  ```

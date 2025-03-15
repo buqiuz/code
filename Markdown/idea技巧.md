@@ -94,4 +94,4 @@
 
 > 注意：若是新版微软输入法,快捷键会因为冲突而失效,需要在输入法设置中修改为旧版输入法
 
-![alt text](images/idea技巧/image.png)
+![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image.png)
