@@ -121,7 +121,7 @@ SpringAMQP提供了几个类，用来声明队列、交换机及其绑定关系�
 - Exchange：用于声明交换机，可以用工厂类ExchangeBuilder构建
 - Binding：用于声明队列和交换机的绑定关系，可以用工厂类BindingBuilder构建
 
-![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image.png)
+![](assets/RabbitMq/image.png)
 
 ```java
 @Configuration

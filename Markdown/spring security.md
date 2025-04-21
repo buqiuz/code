@@ -53,7 +53,7 @@ spring security是一个开源的java安全框架，提供了一套安全解决�
 
 是spring security中的一个关键过滤器,用于将过滤器的实际处理委托给spring应用上下文的一个指定的bean。它主要用于将servlet过滤器与spring管理的bean集成起来,从而利用spring框架的强大功能来管理过滤器的生命周期和依赖注入
 
-![alt text](<images/spring security/image.png>)
+![](assets/spring security/image_1745254715995.png)
 
 ## 2. 配置
 
@@ -158,14 +158,14 @@ OAuth2是一种授权协议,用于第三方应用获取用户数据
     import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
     import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
     import org.springframework.security.core.userdetails.UserDetailsService;
-
+    
     @Configuration
     @EnableWebSecurity
     public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    
         @Autowired
         private UserDetailsService userDetailsService;
-
+    
         @Bean
         public MyCustomDaoAuthenticationProvider myCustomDaoAuthenticationProvider() {
             MyCustomDaoAuthenticationProvider provider = new MyCustomDaoAuthenticationProvider();
@@ -174,12 +174,12 @@ OAuth2是一种授权协议,用于第三方应用获取用户数据
             // provider.setPasswordEncoder(passwordEncoder());
             return provider;
         }
-
+    
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.authenticationProvider(myCustomDaoAuthenticationProvider());
         }
-
+    
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
@@ -202,4 +202,4 @@ OAuth2是一种授权协议,用于第三方应用获取用户数据
 这样配置后，当Spring Security处理认证请求时，它会使用你自定义的`MyCustomDaoAuthenticationProvider`，从而执行你重写的方法中的逻辑。
 
 其中UserDetailsService必须配置
-![alt text](<images/spring security/image-1.png>)
+![](assets/spring security/image-1_1745254716054.png)

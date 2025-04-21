@@ -115,7 +115,7 @@ console.log('hello world')
 
 ## 6. 图片
 
-![图片](https://raw.githubusercontent.com/buqiuz/Images/main/%25E5%258E%258B%25E7%25BC%25A9%25E6%25B0%25B4%25E7%258B%2597.png)
+![](assets/Markdown语法/%2525E5%25258E%25258B%2525E7%2525BC%2525A9%2525E6%2525B0%2525B4%2525E7%25258B%252597.png)
 
 ## 7. 表格
 

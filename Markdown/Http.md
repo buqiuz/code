@@ -13,7 +13,7 @@
 
 ## URL
 
-![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image.png)
+![](assets/Http/image.png)
 
 ## sync & Async
 

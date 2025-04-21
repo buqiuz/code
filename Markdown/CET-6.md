@@ -1,6 +1,6 @@
 # CET-6
 
-![alt text](https://raw.githubusercontent.com/buqiuz/Images/main/image.png)
+![](assets/CET-6/image.png)
 
 ## 听力
 
